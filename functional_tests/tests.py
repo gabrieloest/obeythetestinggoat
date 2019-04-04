@@ -1,3 +1,4 @@
+import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -13,6 +14,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
         options.add_argument("--start-maximized")
         self.browser = webdriver.Firefox(executable_path='C:\\Users\\oestga\\Drivers\\geckodriver.exe', firefox_options=options)
         # self.browser = webdriver.Chrome(executable_path='C:\\Users\\oestga\\Drivers\\chromedriver.exe', chrome_options=options)
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         self.browser.quit()
