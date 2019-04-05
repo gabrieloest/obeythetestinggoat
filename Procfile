@@ -1,1 +1,1 @@
-python manage.py runserver
+web: gunicorn superlists.wsgi --log-file -
